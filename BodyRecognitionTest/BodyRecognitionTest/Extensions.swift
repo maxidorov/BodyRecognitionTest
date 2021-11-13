@@ -1,10 +1,3 @@
-//
-//  Extensions.swift
-//  BodyRecognitionTest
-//
-//  Created by Maxim V. Sidorov on 11/3/21.
-//
-
 import UIKit
 import CoreGraphics
 import Vision
@@ -24,7 +17,8 @@ extension CGImage {
     UIImage(cgImage: self)
   }
 
-  func drawPoints(points: [CGPoint]) -> CGImage? {
+  func drawSkeleton(points: [JointName : CGPoint]) -> CGImage? {
+
     guard let ctx = CGContext(
       data: nil,
       width: Int(width),
@@ -43,10 +37,27 @@ extension CGImage {
 
     let fillColor = CGColor(red: 0, green: 1, blue: 0, alpha: 1)
     ctx.setFillColor(fillColor)
-    
+
     for point in points {
-      ctx.addArc(center: point)
+
+      var jointName = point.key
+      var cgPoint = point.value
+
+      ctx.addArc(center: cgPoint)
       ctx.drawPath(using: .fill)
+
+      for edge in jointsGraph {
+        if edge[0] == jointName {
+          let startPoint = cgPoint
+          let finishPoint = points[edge[1]]
+          if let finishPoint = finishPoint {
+            ctx.drawLine(startPoint: startPoint, finishPoint: finishPoint, lineWidth:3, color: fillColor)
+          }
+
+        }
+
+      }
+
     }
 
     return ctx.makeImage()
@@ -65,7 +76,18 @@ fileprivate extension CGContext {
   }
 }
 
-fileprivate typealias JointName = VNHumanBodyPoseObservation.JointName
+fileprivate extension CGContext {
+  func drawLine(startPoint: CGPoint, finishPoint: CGPoint, lineWidth: CGFloat, color: CGColor ) {
+    setStrokeColor(color)
+    setLineWidth(lineWidth)
+    move(to: startPoint)
+    addLine(to: finishPoint)
+    drawPath(using: .fillStroke)
+  }
+}
+
+typealias JointName = VNHumanBodyPoseObservation.JointName
+
 fileprivate let jointsGraph: [[JointName]] = [
   [.nose, .leftEar],
   [.nose, .rightEar],
