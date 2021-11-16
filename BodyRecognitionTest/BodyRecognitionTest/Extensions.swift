@@ -17,7 +17,7 @@ extension CGImage {
     UIImage(cgImage: self)
   }
 
-  func drawSkeleton(points: [JointName : CGPoint]) -> CGImage? {
+  func drawSkeleton(points: [JointName : CGPoint?]) -> CGImage? {
 
     guard let ctx = CGContext(
       data: nil,
@@ -39,9 +39,8 @@ extension CGImage {
     ctx.setFillColor(fillColor)
 
     for point in points {
-
-      var jointName = point.key
-      var cgPoint = point.value
+      guard let cgPoint = point.value else { continue }
+      let jointName = point.key
 
       ctx.addArc(center: cgPoint)
       ctx.drawPath(using: .fill)
@@ -49,17 +48,12 @@ extension CGImage {
       for edge in jointsGraph {
         if edge[0] == jointName {
           let startPoint = cgPoint
-          let finishPoint = points[edge[1]]
-          if let finishPoint = finishPoint {
+          if let finishPoint = points[edge[1]], let finishPoint = finishPoint {
             ctx.drawLine(startPoint: startPoint, finishPoint: finishPoint, lineWidth:3, color: fillColor)
           }
-
         }
-
       }
-
     }
-
     return ctx.makeImage()
   }
 }
@@ -87,7 +81,6 @@ fileprivate extension CGContext {
 }
 
 typealias JointName = VNHumanBodyPoseObservation.JointName
-
 fileprivate let jointsGraph: [[JointName]] = [
   [.nose, .leftEar],
   [.nose, .rightEar],
@@ -102,6 +95,8 @@ fileprivate let jointsGraph: [[JointName]] = [
   [.rightElbow, .rightWrist],
   [.leftShoulder, .leftHip],
   [.neck, .root],
+  [.root, .leftHip],
+  [.root, .rightHip],
   [.rightShoulder, .rightHip],
   [.leftHip, .leftKnee],
   [.leftKnee, .leftAnkle],

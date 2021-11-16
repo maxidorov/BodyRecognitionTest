@@ -51,16 +51,18 @@ final class ImageProcessor {
   }
 
   private func bodyPoseHandler(request: VNRequest, error: Error?) {
-    guard let cgImage = imageInfo?.cgImage,
-      let observations = request.results as? [VNHumanBodyPoseObservation],
-      !observations.isEmpty else {
+    guard let observations = request.results as? [VNHumanBodyPoseObservation], !observations.isEmpty else {
+      imageInfo.map { imageInfo in
+        onMainThreadAsync {
+          self.delegate?.update(image: imageInfo.cgImage.asUIImage)
+        }
+      }
       return
     }
 
-    let flatten = observations.map(processObservation)
-      .compactMap { $0 }.flatMap { $0 }
-
-    guard let image = cgImage.drawPoints(points: flatten)?.asUIImage else {
+    guard let cgImage = imageInfo?.cgImage,
+        let points = processObservation(observations[0]),
+        let image = cgImage.drawSkeleton(points: points)?.asUIImage else {
       return
     }
 
@@ -71,26 +73,28 @@ final class ImageProcessor {
 
   private func processObservation(
     _ observation: VNHumanBodyPoseObservation
-  ) -> [CGPoint]? {
-    guard let recognizedPoints = try? observation.recognizedPoints(forGroupKey: .all) else {
-      return []
-    }
-
-    recognizedPoints.keys.forEach { key in
-      print(key, key.rawValue)
-    }
-
-    return recognizedPoints.values.compactMap {
-      guard $0.confidence > 0, let size = imageInfo?.size else {
+  ) -> [JointName: CGPoint?]? {
+    let jointNames = observation.availableJointNames
+    let points = jointNames.map { (jointName: JointName) -> CGPoint? in
+      guard let recognizedPoint = try? observation.recognizedPoint(jointName),
+            recognizedPoint.confidence > 0,
+            let size = imageInfo?.size else {
         return nil
       }
 
       return VNImagePointForNormalizedPoint(
-        $0.location,
+        recognizedPoint.location,
         Int(size.width),
         Int(size.height)
       )
     }
+
+    var dict: [JointName: CGPoint?] = [:]
+    for (i, jointName) in jointNames.enumerated() {
+      dict[jointName] = points[i]
+    }
+
+    return dict
   }
 }
 

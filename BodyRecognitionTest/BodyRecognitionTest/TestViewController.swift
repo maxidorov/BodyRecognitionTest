@@ -40,7 +40,6 @@ class TestViewController: UIViewController {
 
   private let session: AVCaptureSession
   private let videoOutputDelegate: AVCaptureVideoDataOutputSampleBufferDelegate
-  private let cameraView: UIView
   private let processedImageView: UIImageView
   private let imageProcessor: ImageProcessor
   private let imageProcessorDelegate: ImageProcessing
@@ -48,12 +47,7 @@ class TestViewController: UIViewController {
   init() {
     imageProcessor = ImageProcessor()
 
-    processedImageView = UIImageView(
-      frame: CGRect(
-        origin: .zero,
-        size: CGSize(width: 300, height: 600)
-      )
-    )
+    processedImageView = UIImageView()
 
     imageProcessorDelegate = ImageProcessingImpl(imageContainer: processedImageView)
     imageProcessor.delegate = imageProcessorDelegate
@@ -63,11 +57,6 @@ class TestViewController: UIViewController {
     session = try! CaptureSessionFactory.makeSession(
       outputDelegate: videoOutputDelegate,
       outputQueue: videoDataOutputQueue
-    )
-
-    cameraView = CameraFeedView(
-      session: session,
-      videoOrientation: .portrait
     )
 
     super.init(nibName: nil, bundle: nil)
@@ -80,13 +69,12 @@ class TestViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     session.startRunning()
-    view.addSubview(cameraView)
     view.addSubview(processedImageView)
   }
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    cameraView.frame = view.bounds
+    processedImageView.frame = view.bounds
   }
 }
 
