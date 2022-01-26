@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3460E34B274AE0B4001E086B /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460E34A274AE0B4001E086B /* FitnessView.swift */; };
 		34FA65D02732DEAE007D23A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA65CF2732DEAE007D23A0 /* AppDelegate.swift */; };
 		34FA65D22732DEAE007D23A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA65D12732DEAE007D23A0 /* SceneDelegate.swift */; };
 		34FA65D42732DEAE007D23A0 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA65D32732DEAE007D23A0 /* TestViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3460E34A274AE0B4001E086B /* FitnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
 		34FA65CC2732DEAE007D23A0 /* BodyRecognitionTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyRecognitionTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FA65CF2732DEAE007D23A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34FA65D12732DEAE007D23A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				34FA65EB27331CE9007D23A0 /* ImageProcessor.swift */,
 				34FA65E52732E002007D23A0 /* CaptureSessionFactory.swift */,
 				34FA65E9273305E5007D23A0 /* Extensions.swift */,
+				3460E34A274AE0B4001E086B /* FitnessView.swift */,
 				34FA65D82732DEAF007D23A0 /* Assets.xcassets */,
 				34FA65DA2732DEAF007D23A0 /* LaunchScreen.storyboard */,
 				34FA65DD2732DEAF007D23A0 /* Info.plist */,
@@ -149,6 +152,7 @@
 				34FA65D42732DEAE007D23A0 /* TestViewController.swift in Sources */,
 				34FA65EC27331CE9007D23A0 /* ImageProcessor.swift in Sources */,
 				34FA65EA273305E5007D23A0 /* Extensions.swift in Sources */,
+				3460E34B274AE0B4001E086B /* FitnessView.swift in Sources */,
 				34FA65D02732DEAE007D23A0 /* AppDelegate.swift in Sources */,
 				34FA65D22732DEAE007D23A0 /* SceneDelegate.swift in Sources */,
 				34FA65E42732DEBE007D23A0 /* CameraFeedView.swift in Sources */,

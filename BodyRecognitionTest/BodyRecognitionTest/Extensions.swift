@@ -18,7 +18,6 @@ extension CGImage {
   }
 
   func drawSkeleton(points: [JointName : CGPoint?]) -> CGImage? {
-
     guard let ctx = CGContext(
       data: nil,
       width: Int(width),
@@ -31,6 +30,15 @@ extension CGImage {
       return nil
     }
 
+
+//    print(points.sorted { $0.key < $1.key }.map(\.key.rawValue.rawValue).map { ["\($0)_x", "\($0)_y"]}.flatMap { $0 })
+//    print(points.sorted { $0.key < $1.key }.map { $0.value ?? .zero })
+    print(points.sorted { $0.key < $1.key }.map(\.value).map { point in
+      point.map {
+        ["\($0.x)", "\($0.y)"]
+      } ?? ["nil", "nil"]
+    }.flatMap { $0 }.toPrint)
+  
     let selfSize = CGSize(width: width, height: height)
     let selfRect = CGRect(origin: .zero, size: selfSize)
     ctx.draw(self, in: selfRect)
@@ -80,6 +88,12 @@ fileprivate extension CGContext {
   }
 }
 
+extension VNHumanBodyPoseObservation.JointName: Comparable {
+  public static func < (lhs: VNHumanBodyPoseObservation.JointName, rhs: VNHumanBodyPoseObservation.JointName) -> Bool {
+    return lhs.rawValue.rawValue < rhs.rawValue.rawValue
+  }
+}
+
 typealias JointName = VNHumanBodyPoseObservation.JointName
 fileprivate let jointsGraph: [[JointName]] = [
   [.nose, .leftEar],
@@ -103,3 +117,14 @@ fileprivate let jointsGraph: [[JointName]] = [
   [.rightHip, .rightKnee],
   [.rightKnee, .rightAnkle]
 ]
+
+extension Array {
+    var toPrint: String  {
+        var str = ""
+        for element in self {
+            str += "\(element) "
+        }
+        return str
+    }
+}
+
