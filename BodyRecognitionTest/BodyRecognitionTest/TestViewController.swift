@@ -42,15 +42,19 @@ class TestViewController: UIViewController {
   private let videoOutputDelegate: AVCaptureVideoDataOutputSampleBufferDelegate
   private let processedImageView: UIImageView
   private let imageProcessor: ImageProcessor
-  private let imageProcessorDelegate: ImageProcessing
+  private let squatsСounterView: UILabel
+  private var squatsCounter: Int = 0 {
+    didSet {
+      onMainThreadAsync {
+        self.squatsСounterView.text = String(self.squatsCounter)
+      }
+    }
+  }
 
   init() {
     imageProcessor = ImageProcessor()
 
     processedImageView = UIImageView()
-
-    imageProcessorDelegate = ImageProcessingImpl(imageContainer: processedImageView)
-    imageProcessor.delegate = imageProcessorDelegate
 
     videoOutputDelegate = VideoOutputDelegate(imageProcessor: imageProcessor)
     
@@ -58,7 +62,15 @@ class TestViewController: UIViewController {
       outputDelegate: videoOutputDelegate,
       outputQueue: videoDataOutputQueue
     )
-
+    
+    squatsСounterView = {
+      let label = UILabel()
+      label.font = UIFont.systemFont(ofSize: 60.0)
+      label.textColor = .green
+      label.text = "0"
+      label.translatesAutoresizingMaskIntoConstraints = false
+      return label
+    }()
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -68,8 +80,14 @@ class TestViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    imageProcessor.delegate = self
+    
     session.startRunning()
     view.addSubview(processedImageView)
+    processedImageView.addSubview(squatsСounterView)
+    squatsСounterView.centerXAnchor.constraint(equalTo: processedImageView.centerXAnchor).isActive = true
+    squatsСounterView.centerYAnchor.constraint(equalTo: processedImageView.centerYAnchor).isActive = true
   }
 
   override func viewDidLayoutSubviews() {
@@ -79,7 +97,13 @@ class TestViewController: UIViewController {
 }
 
 extension TestViewController: ImageProcessing {
+  
+  func didSquat() {
+    squatsCounter += 1
+  }
+  
   func update(image: UIImage) {
     processedImageView.image = image
   }
+  
 }

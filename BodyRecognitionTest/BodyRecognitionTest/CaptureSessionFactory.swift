@@ -21,7 +21,7 @@ final class CaptureSessionFactory {
     let discoverySession = AVCaptureDevice.DiscoverySession(
       deviceTypes: [wideAngle],
       mediaType: .video,
-      position: .unspecified
+      position: .front
     )
 
     guard let videoDevice = discoverySession.devices.first else {

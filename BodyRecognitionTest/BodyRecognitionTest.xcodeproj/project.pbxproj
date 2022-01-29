@@ -17,6 +17,10 @@
 		34FA65E62732E002007D23A0 /* CaptureSessionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA65E52732E002007D23A0 /* CaptureSessionFactory.swift */; };
 		34FA65EA273305E5007D23A0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA65E9273305E5007D23A0 /* Extensions.swift */; };
 		34FA65EC27331CE9007D23A0 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA65EB27331CE9007D23A0 /* ImageProcessor.swift */; };
+		9D6D7C9527A583BE00556E06 /* SquatsCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6D7C9427A583BE00556E06 /* SquatsCounter.swift */; };
+		9D6D7C9727A5947400556E06 /* SquatPoseRecognizerModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9D6D7C9627A5947400556E06 /* SquatPoseRecognizerModel.mlmodel */; };
+		9DA8DC3327A1F74F00BFF090 /* ProcessedImageViewWithCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA8DC3227A1F74F00BFF090 /* ProcessedImageViewWithCounter.swift */; };
+		9DA8DC3527A1FB7500BFF090 /* SquatPoseRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA8DC3427A1FB7500BFF090 /* SquatPoseRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		34FA65E52732E002007D23A0 /* CaptureSessionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionFactory.swift; sourceTree = "<group>"; };
 		34FA65E9273305E5007D23A0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		34FA65EB27331CE9007D23A0 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		9D6D7C9427A583BE00556E06 /* SquatsCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquatsCounter.swift; sourceTree = "<group>"; };
+		9D6D7C9627A5947400556E06 /* SquatPoseRecognizerModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SquatPoseRecognizerModel.mlmodel; sourceTree = "<group>"; };
+		9DA8DC3227A1F74F00BFF090 /* ProcessedImageViewWithCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedImageViewWithCounter.swift; sourceTree = "<group>"; };
+		9DA8DC3427A1FB7500BFF090 /* SquatPoseRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquatPoseRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,8 @@
 		34FA65CE2732DEAE007D23A0 /* BodyRecognitionTest */ = {
 			isa = PBXGroup;
 			children = (
+				9D6D7C9327A5826300556E06 /* MlModels */,
+				9D6D7C9227A5824D00556E06 /* Recognizers */,
 				34FA65CF2732DEAE007D23A0 /* AppDelegate.swift */,
 				34FA65D12732DEAE007D23A0 /* SceneDelegate.swift */,
 				34FA65D32732DEAE007D23A0 /* TestViewController.swift */,
@@ -72,11 +82,29 @@
 				34FA65E52732E002007D23A0 /* CaptureSessionFactory.swift */,
 				34FA65E9273305E5007D23A0 /* Extensions.swift */,
 				3460E34A274AE0B4001E086B /* FitnessView.swift */,
+				9DA8DC3227A1F74F00BFF090 /* ProcessedImageViewWithCounter.swift */,
 				34FA65D82732DEAF007D23A0 /* Assets.xcassets */,
 				34FA65DA2732DEAF007D23A0 /* LaunchScreen.storyboard */,
 				34FA65DD2732DEAF007D23A0 /* Info.plist */,
 			);
 			path = BodyRecognitionTest;
+			sourceTree = "<group>";
+		};
+		9D6D7C9227A5824D00556E06 /* Recognizers */ = {
+			isa = PBXGroup;
+			children = (
+				9DA8DC3427A1FB7500BFF090 /* SquatPoseRecognizer.swift */,
+				9D6D7C9427A583BE00556E06 /* SquatsCounter.swift */,
+			);
+			path = Recognizers;
+			sourceTree = "<group>";
+		};
+		9D6D7C9327A5826300556E06 /* MlModels */ = {
+			isa = PBXGroup;
+			children = (
+				9D6D7C9627A5947400556E06 /* SquatPoseRecognizerModel.mlmodel */,
+			);
+			path = MlModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,12 +179,16 @@
 			files = (
 				34FA65D42732DEAE007D23A0 /* TestViewController.swift in Sources */,
 				34FA65EC27331CE9007D23A0 /* ImageProcessor.swift in Sources */,
+				9DA8DC3327A1F74F00BFF090 /* ProcessedImageViewWithCounter.swift in Sources */,
 				34FA65EA273305E5007D23A0 /* Extensions.swift in Sources */,
+				9D6D7C9727A5947400556E06 /* SquatPoseRecognizerModel.mlmodel in Sources */,
 				3460E34B274AE0B4001E086B /* FitnessView.swift in Sources */,
 				34FA65D02732DEAE007D23A0 /* AppDelegate.swift in Sources */,
 				34FA65D22732DEAE007D23A0 /* SceneDelegate.swift in Sources */,
 				34FA65E42732DEBE007D23A0 /* CameraFeedView.swift in Sources */,
+				9DA8DC3527A1FB7500BFF090 /* SquatPoseRecognizer.swift in Sources */,
 				34FA65E62732E002007D23A0 /* CaptureSessionFactory.swift in Sources */,
+				9D6D7C9527A583BE00556E06 /* SquatsCounter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9ZB2A7WP7E;
+				DEVELOPMENT_TEAM = LKM3N765US;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BodyRecognitionTest/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = LaLaLa;
@@ -305,6 +337,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,7 +358,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9ZB2A7WP7E;
+				DEVELOPMENT_TEAM = LKM3N765US;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BodyRecognitionTest/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = LaLaLa;
@@ -333,6 +366,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

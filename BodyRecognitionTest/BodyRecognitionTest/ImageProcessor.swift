@@ -10,18 +10,7 @@ import Vision
 
 protocol ImageProcessing: AnyObject {
   func update(image: UIImage)
-}
-
-class ImageProcessingImpl: ImageProcessing {
-  private let imageContainer: UIImageView
-
-  init(imageContainer: UIImageView) {
-    self.imageContainer = imageContainer
-  }
-
-  func update(image: UIImage) {
-    imageContainer.image = image
-  }
+  func didSquat()
 }
 
 final class ImageProcessor {
@@ -37,6 +26,11 @@ final class ImageProcessor {
 
   weak var delegate: ImageProcessing?
   private var imageInfo: ImageInfo?
+  private var squatsCounter = SquatsCounter()
+  
+  init() {
+    self.squatsCounter.delegate = self
+  }
 
   func getImageWithPoints(cgImage: CGImage?) {
     imageInfo = cgImage.map(ImageInfo.init)
@@ -65,7 +59,9 @@ final class ImageProcessor {
         let image = cgImage.drawSkeleton(points: points)?.asUIImage else {
       return
     }
-
+    
+    squatsCounter.processPose(skeleton: points)
+    
     onMainThreadAsync {
       self.delegate?.update(image: image)
     }
@@ -101,5 +97,11 @@ final class ImageProcessor {
 extension VNImageRequestHandler {
   func perform(_ request: VNRequest) throws {
     try perform([request])
+  }
+}
+
+extension ImageProcessor: SquatsCounterDelegate {
+  func didSquat() {
+    self.delegate?.didSquat()
   }
 }

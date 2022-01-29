@@ -33,11 +33,11 @@ extension CGImage {
 
 //    print(points.sorted { $0.key < $1.key }.map(\.key.rawValue.rawValue).map { ["\($0)_x", "\($0)_y"]}.flatMap { $0 })
 //    print(points.sorted { $0.key < $1.key }.map { $0.value ?? .zero })
-    print(points.sorted { $0.key < $1.key }.map(\.value).map { point in
-      point.map {
-        ["\($0.x)", "\($0.y)"]
-      } ?? ["nil", "nil"]
-    }.flatMap { $0 }.toPrint)
+//    print(points.sorted { $0.key < $1.key }.map(\.value).map { point in
+//      point.map {
+//        ["\($0.x)", "\($0.y)"]
+//      } ?? ["nil", "nil"]
+//    }.flatMap { $0 }.toPrint)
   
     let selfSize = CGSize(width: width, height: height)
     let selfRect = CGRect(origin: .zero, size: selfSize)
